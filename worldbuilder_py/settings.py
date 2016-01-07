@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'worldbuilder.apps.WorldBuilderConfig',
+    'worldbuilder.apps.worldbuilderConfig',
 ]
 
 MIDDLEWARE_CLASSES = [

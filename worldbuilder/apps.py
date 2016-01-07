@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class WorldBuilderConfig(AppConfig):
+class worldbuilderConfig(AppConfig):
     name = 'worldbuilder'
