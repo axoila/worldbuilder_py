@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig',
+    'worldbuilder.apps.PollsConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
