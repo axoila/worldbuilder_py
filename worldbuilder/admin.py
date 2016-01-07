@@ -11,6 +11,6 @@ class WorldAdmin(admin.ModelAdmin):
         (None,               {'fields': ['world_name']}),
     ]
     inlines = [EntryInline]
-    list_display = ('world_name', 'entry_count')
+    list_display = ['world_name', 'entry_count']
     search_fields = ['world_name']
 admin.site.register(World, WorldAdmin)

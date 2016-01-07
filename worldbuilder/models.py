@@ -10,7 +10,7 @@ class World(models.Model):
     def __str__(self):
         return self.world_name
     def entry_count(self):
-        return len(self.objects.all())
+        return len(World.objects.all())
 
 @python_2_unicode_compatible
 class Entry(models.Model):
