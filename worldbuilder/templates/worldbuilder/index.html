@@ -2,12 +2,12 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'worldbuilder/style.css' %}" />
 
-{% if latest_question_list %}
+{% if worlds %}
     <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'worldbuilder:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% for world in worlds %}
+        <li><a href="{% url 'worldbuilder:detail' world.id %}">{{ world.world_name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No worldbuilders are available.</p>
+    <p>No worlds are available.</p>
 {% endif %}
