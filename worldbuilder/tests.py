@@ -23,9 +23,9 @@ class QuestionMethodTests(TestCase):
         """
         If no questions exist, an appropriate message should be displayed.
         """
-        response = self.client.get(reverse('polls:index'))
+        response = self.client.get(reverse('worldbuilder:index'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "No polls are available.")
+        self.assertContains(response, "No worldbuilder are available.")
         self.assertQuerysetEqual(response.context['latest_question_list'], [])
 
     def test_index_view_with_a_past_question(self):
@@ -34,7 +34,7 @@ class QuestionMethodTests(TestCase):
         index page.
         """
         create_question(question_text="Past question.", days=-30)
-        response = self.client.get(reverse('polls:index'))
+        response = self.client.get(reverse('worldbuilder:index'))
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
             ['<Question: Past question.>']
@@ -46,8 +46,8 @@ class QuestionMethodTests(TestCase):
         the index page.
         """
         create_question(question_text="Future question.", days=30)
-        response = self.client.get(reverse('polls:index'))
-        self.assertContains(response, "No polls are available.",
+        response = self.client.get(reverse('worldbuilder:index'))
+        self.assertContains(response, "No worldbuilder are available.",
                             status_code=200)
         self.assertQuerysetEqual(response.context['latest_question_list'], [])
 
@@ -58,7 +58,7 @@ class QuestionMethodTests(TestCase):
         """
         create_question(question_text="Past question.", days=-30)
         create_question(question_text="Future question.", days=30)
-        response = self.client.get(reverse('polls:index'))
+        response = self.client.get(reverse('worldbuilder:index'))
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
             ['<Question: Past question.>']
@@ -70,7 +70,7 @@ class QuestionMethodTests(TestCase):
         """
         create_question(question_text="Past question 1.", days=-30)
         create_question(question_text="Past question 2.", days=-5)
-        response = self.client.get(reverse('polls:index'))
+        response = self.client.get(reverse('worldbuilder:index'))
         self.assertQuerysetEqual(
             response.context['latest_question_list'],
             ['<Question: Past question 2.>', '<Question: Past question 1.>']
@@ -84,7 +84,7 @@ class QuestionIndexDetailTests(TestCase):
         """
         future_question = create_question(question_text='Future question.',
                                           days=5)
-        response = self.client.get(reverse('polls:detail',
+        response = self.client.get(reverse('worldbuilder:detail',
                                    args=(future_question.id,)))
         self.assertEqual(response.status_code, 404)
 
@@ -94,5 +94,5 @@ class QuestionIndexDetailTests(TestCase):
         display the question's text.
         """
         past_question = create_question(question_text='Past Question.', days=-5)
-        response = self.client.get(reverse('polls:detail', args=(past_question.id,)))
+        response = self.client.get(reverse('worldbuilder:detail', args=(past_question.id,)))
         self.assertContains(response, past_question.question_text, status_code=200)
