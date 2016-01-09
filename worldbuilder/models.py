@@ -8,7 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 class World(models.Model):
     name = models.CharField(max_length=200)
     def __str__(self):
-        return self.world_name
+        return self.name
     def entry_count(self):
         if self.entry_set is None:
             return "-"
@@ -20,7 +20,7 @@ class Entry(models.Model):
     world = models.ForeignKey(World, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     def __str__(self):
-        return self.entry_name
+        return self.name
     def variable_count(self):
         if self.variable_set is None:
             return "-"
@@ -30,7 +30,7 @@ class Entry(models.Model):
 @python_2_unicode_compatible
 class Variable(models.Model):
     entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, default="please Set a Name")
-    value = models.CharField(max_length=200, default="please Set a Name")
+    name = models.CharField(max_length=200, default="-")
+    value = models.CharField(max_length=200, default="-")
     def __str__(self):
-        return self.variable_name
+        return self.name

@@ -1,13 +1,19 @@
-<h1>{{ entry.name }}</h1>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'worldbuilder/style.css' %}" />
+
+<header>
+  <h1>{{ entry.name }}</h1>
+</header>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<table border=1>
-{% csrf_token %}
-{% for variable in entry.variable_set.all %}
+<div>
+  <table>
+  {% csrf_token %}
+  {% for variable in entry.variable_set.all %}
     <tr>
-      <td>{{ variable.name }}</td>
+      <th>{{ variable.name }}</th>
       <td>{{ variable.value }}</td>
     </tr>
-{% endfor %}
-</table>
+  {% endfor %}
+  </table>
+</div>
