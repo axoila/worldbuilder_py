@@ -6,21 +6,31 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class World(models.Model):
-    world_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     def __str__(self):
         return self.world_name
     def entry_count(self):
-        return len(World.objects.all())
+        if self.entry_set is None:
+            return "-"
+        else:
+            return self.entry_set.count()
 
 @python_2_unicode_compatible
 class Entry(models.Model):
     world = models.ForeignKey(World, on_delete=models.CASCADE)
-    entry_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     def __str__(self):
         return self.entry_name
+    def variable_count(self):
+        if self.variable_set is None:
+            return "-"
+        else:
+            return self.variable_set.count()
 
+@python_2_unicode_compatible
 class Variable(models.Model):
     entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
-
-class TextEntry(Variable):
-    value = ""
+    name = models.CharField(max_length=200, default="please Set a Name")
+    value = models.CharField(max_length=200, default="please Set a Name")
+    def __str__(self):
+        return self.variable_name

@@ -1,0 +1,12 @@
+<h1>{{ world.name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<table border=1>
+{% csrf_token %}
+{% for entry in world.entry_set.all %}
+    <tr>
+      <td><a href="{% url 'worldbuilder:entry' world.id entry.id %}"> {{ entry.name }} </a></td>
+    </tr>
+{% endfor %}
+</table>

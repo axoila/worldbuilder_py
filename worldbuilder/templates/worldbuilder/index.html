@@ -5,7 +5,7 @@
 {% if worlds %}
     <ul>
     {% for world in worlds %}
-        <li><a href="{% url 'worldbuilder:detail' world.id %}">{{ world.world_name }}</a></li>
+        <li><a href="{% url 'worldbuilder:world' world.id %}">{{ world.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
