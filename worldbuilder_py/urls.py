@@ -18,6 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     #url(r'^$', include('worldbuilder.urls')),
+    url(r'^', include('worldbuilder.urls')),
     url(r'^wb/', include('worldbuilder.urls')),
     url(r'^worldbuilder/', include('worldbuilder.urls')),
     url(r'^admin/', admin.site.urls),
