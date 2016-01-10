@@ -16,10 +16,19 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from . import views
+
+app_name = 'base'
 urlpatterns = [
-    #url(r'^$', include('worldbuilder.urls')),
+    url(r'^admin/', admin.site.urls, name='admin'),
+    url(r'^login/$',  views.login, name='login'),
+    url(r'^auth/$',  views.auth_view, name='auth'),
+    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^loggedin/$', views.loggedin, name='loggedin'),
+    url(r'^invalid/$', views.invalid_login, name='invalid'),
+    url(r'^invalid/$', views.invalid_login, name='profile'),
+    url(r'^register/$', views.register_user, name='register'),
+    url(r'^register_success/$', views.register_success, name='register_success'),
+
     url(r'^', include('worldbuilder.urls')),
-    url(r'^wb/', include('worldbuilder.urls')),
-    url(r'^worldbuilder/', include('worldbuilder.urls')),
-    url(r'^admin/', admin.site.urls),
 ]
