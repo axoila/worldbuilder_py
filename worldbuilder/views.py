@@ -16,18 +16,25 @@ def IndexView(request):
     context = {'users': userList}
     return render(request, 'worldbuilder/index.html', context)
 
-def WorldView(request, world_id):
-    world = get_object_or_404(World, pk=world_id)
-    context = {'world': world}
+def userView(request, user_name):
+    user = User.objects.get(username=user_name)
+    worlds = user.world_set.all()
+    context = {'worlds': worlds, 'user': user}
+    return render(request, 'worldbuilder/user.html', context)
+
+def WorldView(request, user_name, world_name):
+    user = User.objects.get(username=user_name)
+    world = user.world_set.get(name=world_name)
+    entries = world.entry_set.all()
+    context = {'entries':entries, 'world': world, 'user': user}
     return render(request, 'worldbuilder/world.html', context)
 
-def EntryView(request, world_id, entry_id):
-    try:
-        world = World.objects.get(pk=world_id)
-        entry = get_object_or_404(world.entry_set, pk=entry_id)
-    except World.DoesNotExist:
-        raise Http404("No Entry matches the given query.")
-    context = {'entry': entry}
+def EntryView(request, user_name, world_name, entry_name):
+    user = User.objects.get(username=user_name)
+    world = user.world_set.get(name=world_name)
+    entry = world.entry_set.get(name=entry_name)
+    variables = entry.variable_set.all()
+    context = {'variables':variables, 'entry':entry, 'world': world, 'user': user}
     return render(request, 'worldbuilder/entry.html', context)
 
 def createEntry(request):

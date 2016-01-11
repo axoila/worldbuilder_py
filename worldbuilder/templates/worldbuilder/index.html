@@ -1,13 +1,18 @@
 {% load staticfiles %}
-
 <link rel="stylesheet" type="text/css" href="{% static 'worldbuilder/style.css' %}" />
 
-{% if worlds %}
-    <ul>
-    {% for user in users %}
-        <li><a href="{% url 'worldbuilder:world' user.id %}">{{ user.name }}</a></li>
-    {% endfor %}
-    </ul>
+{% if users %}
+<div>
+  <table>
+  {% csrf_token %}
+  {% for user in users %}
+    <tr>
+      <td><a href="{% url 'worldbuilder:user' user.username %}">{{ user.username }}</a></td>
+      <!-- <td>{{ variable.value }}</td> -->
+    </tr>
+  {% endfor %}
+  </table>
+</div>
 {% else %}
     <p>No worlds are available.</p>
 {% endif %}

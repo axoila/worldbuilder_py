@@ -9,7 +9,7 @@
 <div>
   <table>
   {% csrf_token %}
-  {% for variable in entry.variable_set.all %}
+  {% for variable in variables %}
     <tr>
       <th>{{ variable.name }}</th>
       <td>{{ variable.value }}</td>

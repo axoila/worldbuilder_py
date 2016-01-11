@@ -1,16 +1,18 @@
-<h1>{{ world.name }}</h1>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'worldbuilder/style.css' %}" />
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<header>
+  <h1>{{ world.name }}</h1>
+</header>
 
-<table border=1>
+<table>
 {% csrf_token %}
-{% for entry in world.entry_set.all %}
+{% for entry in entries %}
     <tr>
-      <td><a href="{% url 'worldbuilder:entry' world.id entry.id %}"> {{ entry.name }} </a></td>
+      <td><a href="{% url 'worldbuilder:entry' user.username world.name entry.name %}"> {{ entry.name }} </a></td>
     </tr>
 {% endfor %}
+    <tr>
+      <td><a href="{% url 'worldbuilder:createEntry' user.username world.name%}"> add an entry </a></td>
+    </tr>
 </table>
-
-<footer>
-  <a href="{% url 'worldbuilder:createEntry'%}"> add an entry </a>
-</footer>

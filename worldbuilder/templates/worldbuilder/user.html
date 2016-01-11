@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'worldbuilder/style.css' %}" />
+
+<header>
+  <h1>{{ user.username }}</h1>
+</header>
+
+<table>
+{% csrf_token %}
+{% for world in user.world_set.all %}
+    <tr>
+      <td><a href="{% url 'worldbuilder:world' user.username world.name %}"> {{ world.name }} </a></td>
+    </tr>
+{% endfor %}
+</table>
+
+<footer>
+  <!-- <a href="{% url 'worldbuilder:createWorld' user.username %}"> add an entry </a> -->
+</footer>

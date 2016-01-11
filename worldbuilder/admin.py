@@ -7,7 +7,7 @@ class EntryInline(admin.StackedInline):
     extra = 0
 class WorldAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,               {'fields': ['name']}),
+        (None,               {'fields': ['name', 'owner']}),
         # ('Entries in this World',  {'fields': ['entry_count']}),
     ]
     inlines = [EntryInline]
