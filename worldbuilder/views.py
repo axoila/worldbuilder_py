@@ -1,15 +1,19 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, render_to_response
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from django.views import generic
-from django.utils import timezone
+# from django.views import generic
+# from django.utils import timezone
+# from django import forms
+from worldbuilder.forms import EntryForm
+from django.template.context_processors import csrf
+from django.contrib.auth.models import User
 
 from .models import World, Entry, Variable
 
 
 def IndexView(request):
-    worldList = World.objects.all()
-    context = {'worlds': worldList}
+    userList = User.objects.all()
+    context = {'users': userList}
     return render(request, 'worldbuilder/index.html', context)
 
 def WorldView(request, world_id):
@@ -26,20 +30,17 @@ def EntryView(request, world_id, entry_id):
     context = {'entry': entry}
     return render(request, 'worldbuilder/entry.html', context)
 
-def modifyEntry(request, question_id): #NOT WORKING!!
-    # question = get_object_or_404(Question, pk=question_id)
-    # try:
-    #     selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    # except (KeyError, Choice.DoesNotExist):
-    #     # Redisplay the question voting form.
-    #     return render(request, 'worldbuilder/detail.html', {
-    #         'question': question,
-    #         'error_message': "You didn't select a choice.",
-    #     })
-    # else:
-    #     selected_choice.votes += 1
-    #     selected_choice.save()
-    #     # Always return an HttpResponseRedirect after successfully dealing
-    #     # with POST data. This prevents data from being posted twice if a
-    #     # user hits the Back button.
-        return HttpResponseRedirect(reverse('worldbuilder:results', args=(question.id,)))
+def createEntry(request):
+    if(request.POST):
+        form = EntryForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return HttpResponseRedirect(reverse('worldbuilder:index'))
+    else:
+        form = EntryForm()
+    args = {}
+    args.update(csrf(request))
+
+    args['form'] = form
+
+    return render_to_response('worldbuilder/create_entry.html', args)

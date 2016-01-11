@@ -4,8 +4,8 @@
 
 {% if worlds %}
     <ul>
-    {% for world in worlds %}
-        <li><a href="{% url 'worldbuilder:world' world.id %}">{{ world.name }}</a></li>
+    {% for user in users %}
+        <li><a href="{% url 'worldbuilder:world' user.id %}">{{ user.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

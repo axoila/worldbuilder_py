@@ -3,10 +3,14 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
+# from django.contrib.auth import get_user_model
+from django.conf import settings
+from django.contrib.auth.models import User
 
 @python_2_unicode_compatible
 class World(models.Model):
     name = models.CharField(max_length=200)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, null=True)
     def __str__(self):
         return self.name
     def entry_count(self):
