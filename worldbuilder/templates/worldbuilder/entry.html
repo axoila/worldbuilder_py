@@ -1,5 +1,5 @@
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'worldbuilder/style.css' %}" />
+{% extends "base.html" %}
+{% load static %}
 
 <header>
   <h1>{{ entry.name }}</h1>

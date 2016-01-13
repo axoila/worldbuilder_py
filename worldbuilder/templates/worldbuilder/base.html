@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}My Base Template{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" >
+
+    <!-- <script src="{% get_static_prefix %}js/jquery-2.0.0.min.js"></script>
+    <script src="{% get_static_prefix %}js/ajax.js"></script> -->
+
+</head>
+
+<body>
+    <table id="sitetable">
+        <tr>
+            <td colspan=2>
+                {% block header %}
+                <div id="headerWrapper">
+                    <div id="headerLeft">
+                        <span id="worldbuilder">worldbuilder</span>
+                    </div>
+                    <div id="headerRight">
+                        {% block headerRight %}you are logged in as {{ request.user }} <a href="{% url 'logout' %}">logout</a> <a href="{% url 'worldbuilder:user' request.user %}">my worlds</a>{% endblock %}
+                    </div>
+                </div>
+                {% endblock %}
+            </td>
+        </tr>
+        <tr>
+            <td id="info">
+                {% block info %}
+                    Worldbuilder<br/>by<br/>Ronja Böhringer
+                {% endblock %}
+            </td>
+            <td id="caption" width="99%">
+                <h2>
+                    {% block caption %}
+                    Worldbuilder
+                    {% endblock %}
+                </h2>
+            </td>
+        </tr>
+        <tr>
+            <td id="sidebar">
+                {% block sidebar %}
+                <input type=text>
+                <button>search</button>
+                {% endblock %}
+            </td>
+            <td id="content">
+                {% block content %}
+                Worldbuilder
+                {% endblock %}
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

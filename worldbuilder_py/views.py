@@ -24,7 +24,7 @@ def auth_view(request):
 
     if user is not None:
         auth.login(request, user)
-        return HttpResponseRedirect(reverse('loggedin'))
+        return HttpResponseRedirect(reverse('worldbuilder:index'))
     else:
         return HttpResponseRedirect(reverse('invalid'))
 

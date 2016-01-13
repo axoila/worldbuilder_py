@@ -1,18 +1,24 @@
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'worldbuilder/style.css' %}" />
+{% extends "worldbuilder/base.html" %}
+{% load static %}
 
-{% if users %}
-<div>
-  <table>
-  {% csrf_token %}
-  {% for user in users %}
-    <tr>
-      <td><a href="{% url 'worldbuilder:user' user.username %}">{{ user.username }}</a></td>
-      <!-- <td>{{ variable.value }}</td> -->
-    </tr>
-  {% endfor %}
-  </table>
-</div>
-{% else %}
-    <p>No worlds are available.</p>
-{% endif %}
+{% block title %}
+Worldbuilder
+{% endblock %}
+
+{% block content %}
+    {% if users %}
+        <div>
+          <table id="informationTable">
+          {% csrf_token %}
+          {% for user in users %}
+            <tr>
+              <td><a href="{% url 'worldbuilder:user' user.username %}">{{ user.username }}</a></td>
+              <!-- <td>{{ variable.value }}</td> -->
+            </tr>
+          {% endfor %}
+          </table>
+        </div>
+    {% else %}
+        <p>No worlds are available.</p>
+    {% endif %}
+{% endblock %}

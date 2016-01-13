@@ -1,0 +1,52 @@
+body {
+  background-color: lightgrey;
+  position:relative;
+}
+
+table{
+    min-width: 100%;
+    border:0px;
+}
+td {
+    padding: 0px;
+}
+#headerLeft{
+    float:left;
+}
+#headerRight{
+    float:right;
+}
+
+#sitetable td {
+    min-height: 100%;
+    overflow: hidden;
+    background-color: darkgrey;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+#sidebar{
+    vertical-align: top;
+}
+
+button{
+    width: 100%;
+}
+
+#content{
+
+}
+
+#informationTable {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0px 10px 0px;
+}
+#informationTable td, th{
+    text-align: left;
+    vertical-align: text-top;
+    padding: 5px;
+    border-bottom: 1px solid grey;
+}
