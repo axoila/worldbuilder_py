@@ -1,19 +1,23 @@
-{% extends "base.html" %}
+{% extends "worldbuilder/base.html" %}
 {% load static %}
 
-<header>
-  <h1>{{ entry.name }}</h1>
-</header>
+{% block title %}
+     {{ entry.name }} - worldbuilder
+{% endblock %}
 
+{% block caption %}
+  {{ entry.name }}
+{% endblock %}
+
+{% block content %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<div>
-  <table>
-  {% csrf_token %}
-  {% for variable in variables %}
+<table id="informationTable">
+    {% csrf_token %}
+    {% for variable in variables %}
     <tr>
-      <th>{{ variable.name }}</th>
-      <td>{{ variable.value }}</td>
+        <th>{{ variable.name }}</th>
+        <td>{{ variable.value }}</td>
     </tr>
-  {% endfor %}
-  </table>
-</div>
+    {% endfor %}
+</table>
+{% endblock %}

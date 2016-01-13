@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block title %}
-  <h1>{{ user.username }}</h1>
+    {{ user.username }} - worldbuilder
+{% endblock %}
+
+{% block caption %}
+  {{ user.username }}
 {% endblock %}
 
 {% block content %}

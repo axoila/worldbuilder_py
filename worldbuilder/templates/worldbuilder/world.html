@@ -1,11 +1,16 @@
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'worldbuilder/style.css' %}" />
+{% extends "worldbuilder/base.html" %}
+{% load static %}
 
-<header>
-  <h1>{{ world.name }}</h1>
-</header>
+{% block title %}
+    {{ user.username }} - worldbuilder
+{% endblock %}
 
-<table>
+{% block caption %}
+  {{ world.name }}
+{% endblock %}
+
+{% block content %}
+<table id="informationTable">
 {% csrf_token %}
 {% for entry in entries %}
     <tr>
@@ -16,3 +21,4 @@
       <td><a href="{% url 'worldbuilder:createEntry' user.username world.name%}"> add an entry </a></td>
     </tr>
 </table>
+{% endblock %}
